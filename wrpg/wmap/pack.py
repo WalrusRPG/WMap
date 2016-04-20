@@ -44,6 +44,9 @@ def pack(mapFile):
     # Raw storage.
     for layer in map_tile_layers:
         for tile in layer.tiles:
-            data += struct.pack('>H', tile.gid)
+            id = tile.gid
+            if id > 0:
+                id -= 1
+            data += struct.pack('>H', id)
 
     return header + data
